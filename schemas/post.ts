@@ -44,7 +44,7 @@ export default defineType({
       title: 'Content',
       type: 'array',
       of: [
-        { type: 'block' },
+        { type: 'bloclocaleStringk' },
         {
           type: 'image',
           options: {
@@ -53,13 +53,13 @@ export default defineType({
           fields: [
             {
               name: 'caption',
-              type: 'localeString',
+              type: 'string',
               title: 'Image caption',
               description: 'Caption displayed below the image.',
             },
             {
               name: 'alt',
-              type: 'localeString',
+              type: 'string',
               title: 'Alternative text',
               description: 'Important for SEO and accessiblity.',
             },
