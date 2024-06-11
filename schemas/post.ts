@@ -25,7 +25,7 @@ export default defineType({
     defineField({
       name: 'title',
       title: 'Title',
-      type: 'string',
+      type: 'localeString',
       validation: (rule) => rule.required(),
     }),
     defineField({
@@ -53,13 +53,13 @@ export default defineType({
           fields: [
             {
               name: 'caption',
-              type: 'string',
+              type: 'localeString',
               title: 'Image caption',
               description: 'Caption displayed below the image.',
             },
             {
               name: 'alt',
-              type: 'string',
+              type: 'localeString',
               title: 'Alternative text',
               description: 'Important for SEO and accessiblity.',
             },
