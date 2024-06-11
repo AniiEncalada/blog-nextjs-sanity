@@ -44,7 +44,7 @@ export default defineType({
       title: 'Content',
       type: 'array',
       of: [
-        { type: 'bloclocaleStringk' },
+        { type: 'localeString' },
         {
           type: 'image',
           options: {
