@@ -3,6 +3,8 @@ import { format, parseISO } from 'date-fns'
 import { defineField, defineType } from 'sanity'
 
 import authorType from './author'
+import comunityType from './comunity'
+import categoryType from './category'
 
 /**
  * This file is the schema definition for a post.
@@ -25,7 +27,7 @@ export default defineType({
     defineField({
       name: 'title',
       title: 'Title',
-      type: 'string',
+      type: 'localeString',
       validation: (rule) => rule.required(),
     }),
     defineField({
@@ -44,7 +46,7 @@ export default defineType({
       title: 'Content',
       type: 'array',
       of: [
-        { type: 'block' },
+        { type: 'localeString' },
         {
           type: 'image',
           options: {
@@ -53,13 +55,13 @@ export default defineType({
           fields: [
             {
               name: 'caption',
-              type: 'string',
+              type: 'localeString',
               title: 'Image caption',
               description: 'Caption displayed below the image.',
             },
             {
               name: 'alt',
-              type: 'string',
+              type: 'localeString',
               title: 'Alternative text',
               description: 'Important for SEO and accessiblity.',
             },
@@ -91,6 +93,18 @@ export default defineType({
       title: 'Author',
       type: 'reference',
       to: [{ type: authorType.name }],
+    }),
+    defineField({
+      name: 'comunity',
+      title: 'Comunity',
+      type: 'reference',
+      to: [{ type: comunityType.name }],
+    }),
+    defineField({
+      name: 'category',
+      title: 'Category',
+      type: 'reference',
+      to: [{ type: categoryType.name }],
     }),
   ],
   preview: {
