@@ -25,7 +25,7 @@ export default defineType({
     defineField({
       name: 'title',
       title: 'Title',
-      type: 'localeString',
+      type: 'string',
       validation: (rule) => rule.required(),
     }),
     defineField({
@@ -44,7 +44,7 @@ export default defineType({
       title: 'Content',
       type: 'array',
       of: [
-        { type: 'localeString' },
+        { type: 'block' },
         {
           type: 'image',
           options: {
