@@ -2,7 +2,7 @@ import { groq } from 'next-sanity'
 
 const postFields = groq`
   _id,
-  title,
+  "title": coalesce(title[$locale], title.es, ""),
   date,
   _updatedAt,
   excerpt,

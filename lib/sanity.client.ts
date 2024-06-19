@@ -48,8 +48,11 @@ export async function getSettings(client: SanityClient): Promise<Settings> {
   return (await client.fetch(settingsQuery)) || {}
 }
 
-export async function getAllPosts(client: SanityClient): Promise<Post[]> {
-  return (await client.fetch(indexQuery)) || []
+export async function getAllPosts(
+  client: SanityClient,
+  locale: string,
+): Promise<Post[]> {
+  return (await client.fetch(indexQuery, { locale })) || []
 }
 
 export async function getAllPostsSlugs(): Promise<Pick<Post, 'slug'>[]> {
