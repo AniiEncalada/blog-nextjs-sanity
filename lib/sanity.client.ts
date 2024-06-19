@@ -50,7 +50,7 @@ export async function getSettings(client: SanityClient): Promise<Settings> {
 
 export async function getAllPosts(
   client: SanityClient,
-  locale: string,
+  locale: string = 'es',
 ): Promise<Post[]> {
   return (await client.fetch(indexQuery, { locale })) || []
 }
