@@ -7,12 +7,12 @@ import {
 } from 'lib/sanity.api'
 import {
   indexQuery,
-  type Post,
   postAndMoreStoriesQuery,
   postBySlugQuery,
   postSlugsQuery,
-  type Settings,
   settingsQuery,
+  type Post,
+  type Settings,
 } from 'lib/sanity.queries'
 import { createClient, type SanityClient } from 'next-sanity'
 
@@ -71,6 +71,7 @@ export async function getPostBySlug(
 export async function getPostAndMoreStories(
   client: SanityClient,
   slug: string,
+  locale: string = 'es',
 ): Promise<{ post: Post; morePosts: Post[] }> {
-  return await client.fetch(postAndMoreStoriesQuery, { slug })
+  return await client.fetch(postAndMoreStoriesQuery, { slug, locale })
 }

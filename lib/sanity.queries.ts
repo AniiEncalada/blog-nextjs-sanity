@@ -9,6 +9,8 @@ const postFields = groq`
   coverImage,
   "slug": slug.current,
   "author": author->{name, picture},
+  "category": category->{"name": coalesce(name[$locale], name.es)},
+  "comunity": comunity->{name, logo},
 `
 
 export const settingsQuery = groq`*[_type == "settings"][0]`
@@ -25,7 +27,7 @@ export const postAndMoreStoriesQuery = groq`
     ${postFields}
   },
   "morePosts": *[_type == "post" && slug.current != $slug] | order(date desc, _updatedAt desc) [0...2] {
-    content,
+    content[],
     ${postFields}
   }
 }`
@@ -45,6 +47,15 @@ export interface Author {
   picture?: any
 }
 
+export interface Category {
+  name?: string
+}
+
+export interface Comunity {
+  name?: string
+  logo?: any
+}
+
 export interface Post {
   _id: string
   title?: string
@@ -55,6 +66,8 @@ export interface Post {
   author?: Author
   slug?: string
   content?: any
+  category?: Category
+  comunity?: Comunity
 }
 
 export interface Settings {

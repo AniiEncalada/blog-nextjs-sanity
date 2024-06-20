@@ -3,8 +3,8 @@ import { format, parseISO } from 'date-fns'
 import { defineField, defineType } from 'sanity'
 
 import authorType from './author'
-import comunityType from './comunity'
 import categoryType from './category'
+import comunityType from './comunity'
 
 /**
  * This file is the schema definition for a post.
@@ -109,7 +109,7 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: 'title',
+      title: 'title.es',
       author: 'author.name',
       date: 'date',
       media: 'coverImage',

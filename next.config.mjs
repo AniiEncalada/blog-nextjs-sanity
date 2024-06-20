@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
+import i18n from './next-i18next.config.mjs'
+
 const config = {
+  i18n,
   images: {
     remotePatterns: [
       { hostname: 'cdn.sanity.io' },

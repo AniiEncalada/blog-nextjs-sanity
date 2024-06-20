@@ -27,6 +27,7 @@ export default function Page(props: PageProps) {
 
 export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
   const { draftMode = false, locale = 'es' } = ctx
+
   const client = getClient(draftMode ? { token: readToken } : undefined)
 
   const [settings, posts = []] = await Promise.all([
@@ -35,6 +36,7 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
   ])
 
   return {
+    revalidate: 10,
     props: {
       posts,
       settings,

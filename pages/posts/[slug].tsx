@@ -15,6 +15,7 @@ interface PageProps extends SharedPageProps {
   post: Post
   morePosts: Post[]
   settings?: Settings
+  locale: string
 }
 
 interface Query {
@@ -22,24 +23,36 @@ interface Query {
 }
 
 export default function ProjectSlugRoute(props: PageProps) {
-  const { settings, post, morePosts, draftMode } = props
+  const { settings, post, morePosts, draftMode, locale } = props
 
   if (draftMode) {
     return (
-      <PreviewPostPage post={post} morePosts={morePosts} settings={settings} />
+      <PreviewPostPage
+        post={post}
+        morePosts={morePosts}
+        settings={settings}
+        locale={locale}
+      />
     )
   }
 
-  return <PostPage post={post} morePosts={morePosts} settings={settings} />
+  return (
+    <PostPage
+      post={post}
+      morePosts={morePosts}
+      settings={settings}
+      locale={locale}
+    />
+  )
 }
 
 export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
-  const { draftMode = false, params = {} } = ctx
+  const { draftMode = false, params = {}, locale = 'es' } = ctx
   const client = getClient(draftMode ? { token: readToken } : undefined)
 
   const [settings, { post, morePosts }] = await Promise.all([
     getSettings(client),
-    getPostAndMoreStories(client, params.slug),
+    getPostAndMoreStories(client, params.slug, locale),
   ])
 
   if (!post) {
@@ -49,12 +62,14 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
   }
 
   return {
+    revalidate: 10,
     props: {
       post,
       morePosts,
       settings,
       draftMode,
       token: draftMode ? readToken : '',
+      locale,
     },
   }
 }

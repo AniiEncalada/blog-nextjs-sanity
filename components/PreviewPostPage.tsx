@@ -1,9 +1,9 @@
 import PostPage, { PostPageProps } from 'components/PostPage'
 import {
-  type Post,
-  postAndMoreStoriesQuery,
   Settings,
+  postAndMoreStoriesQuery,
   settingsQuery,
+  type Post,
 } from 'lib/sanity.queries'
 import { useLiveQuery } from 'next-sanity/preview'
 
@@ -30,6 +30,7 @@ export default function PreviewPostPage(props: PostPageProps) {
       post={postPreview}
       morePosts={morePosts}
       settings={settings}
+      locale={props.locale}
     />
   )
 }

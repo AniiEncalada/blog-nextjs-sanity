@@ -15,7 +15,7 @@ export const locate: DocumentLocationResolver = (params, context) => {
   if (params.type === 'post') {
     // Listen to the query and fetch the draft and published document
     const doc$ = context.documentStore.listenQuery(
-      `*[_id == $id && defined(slug.current)][0]{slug,title}`,
+      `*[_id == $id && defined(slug.current)][0]{slug,"title": title.es}`,
       params,
       { perspective: 'previewDrafts' },
     ) as Observable<{
@@ -28,8 +28,8 @@ export const locate: DocumentLocationResolver = (params, context) => {
         return {
           locations: [
             {
-              title: doc.title || 'Untitled',
-              href: `/posts/${doc.slug.current}`,
+              title: doc?.title || 'Untitled',
+              href: `/posts/${doc?.slug?.current}`,
             },
             {
               title: 'Home',
@@ -44,7 +44,7 @@ export const locate: DocumentLocationResolver = (params, context) => {
   if (params.type === 'author') {
     // Fetch all posts that reference the viewed author, if the post has a slug defined
     const doc$ = context.documentStore.listenQuery(
-      `*[_type == "post" && references($id) && defined(slug.current)]{slug,title}`,
+      `*[_type == "post" && references($id) && defined(slug.current)]{slug,"title": title.es}`,
       params,
       { perspective: 'previewDrafts' },
     ) as Observable<
@@ -58,8 +58,8 @@ export const locate: DocumentLocationResolver = (params, context) => {
       map((docs) => {
         return {
           locations: docs?.map((doc) => ({
-            title: doc.title || 'Untitled',
-            href: `/posts/${doc.slug.current}`,
+            title: doc?.title || 'Untitled',
+            href: `/posts/${doc?.slug?.current}`,
           })),
         }
       }),

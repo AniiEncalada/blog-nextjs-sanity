@@ -17,12 +17,20 @@ export interface PostPageProps {
   post: Post
   morePosts: Post[]
   settings: Settings
+  locale: string
 }
 
 const NO_POSTS: Post[] = []
 
 export default function PostPage(props: PostPageProps) {
-  const { preview, loading, morePosts = NO_POSTS, post, settings } = props
+  const {
+    preview,
+    loading,
+    morePosts = NO_POSTS,
+    post,
+    settings,
+    locale,
+  } = props
   const { title = demo.title } = settings || {}
 
   const slug = post?.slug
@@ -48,8 +56,10 @@ export default function PostPage(props: PostPageProps) {
                   coverImage={post.coverImage}
                   date={post.date}
                   author={post.author}
+                  category={post.category}
+                  comunity={post.comunity}
                 />
-                <PostBody content={post.content} />
+                <PostBody content={post.content} locale={locale} />
               </article>
               <SectionSeparator />
               {morePosts?.length > 0 && <MoreStories posts={morePosts} />}

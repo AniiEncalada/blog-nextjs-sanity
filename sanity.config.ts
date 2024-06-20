@@ -15,15 +15,15 @@ import { locate } from 'plugins/locate'
 import { previewDocumentNode } from 'plugins/previewPane'
 import { settingsPlugin, settingsStructure } from 'plugins/settings'
 import { defineConfig } from 'sanity'
+import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
 import { presentationTool } from 'sanity/presentation'
 import { structureTool } from 'sanity/structure'
-import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
 import authorType from 'schemas/author'
-import postType from 'schemas/post'
-import comunityType from 'schemas/comunity'
 import categoryType from 'schemas/category'
-import settingsType from 'schemas/settings'
+import comunityType from 'schemas/comunity'
 import { localeString } from 'schemas/localeStringType'
+import postType from 'schemas/post'
+import settingsType from 'schemas/settings'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
@@ -35,7 +35,14 @@ export default defineConfig({
   title,
   schema: {
     // If you want more content types, you can add them to this array
-    types: [localeString, authorType, postType, comunityType, categoryType, settingsType],
+    types: [
+      localeString,
+      authorType,
+      postType,
+      comunityType,
+      categoryType,
+      settingsType,
+    ],
   },
   plugins: [
     structureTool({
@@ -44,7 +51,7 @@ export default defineConfig({
       defaultDocumentNode: previewDocumentNode(),
     }),
     presentationTool({
-      locate,
+      resolve: { locations: locate },
       previewUrl: {
         draftMode: {
           enable: DRAFT_MODE_ROUTE,

@@ -35,6 +35,8 @@ export default function IndexPage(props: IndexPageProps) {
               author={heroPost.author}
               slug={heroPost.slug}
               excerpt={heroPost.excerpt}
+              comunity={heroPost.comunity}
+              category={heroPost.category}
             />
           )}
           {morePosts.length > 0 && <MoreStories posts={morePosts} />}

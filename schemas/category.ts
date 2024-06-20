@@ -14,10 +14,16 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-        name: 'description',
-        title: 'Description',
-        type: 'localeString',
-        validation: (rule) => rule.required(),
-      }),
+      name: 'description',
+      title: 'Description',
+      type: 'localeString',
+      validation: (rule) => rule.required(),
+    }),
   ],
+  preview: {
+    select: {
+      title: 'name.es',
+      subtitle: 'description.es',
+    },
+  },
 })
